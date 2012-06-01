@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "Dx9World.h"
+#include "Application.h"
 
 #define MAX_LOADSTRING 100
 
@@ -13,7 +14,7 @@ TCHAR szWindowClass[MAX_LOADSTRING];			// 主窗口类名
 
 // 此代码模块中包含的函数的前向声明:
 ATOM				MyRegisterClass(HINSTANCE hInstance);
-BOOL				InitInstance(HINSTANCE, int);
+HWND				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 
@@ -35,22 +36,33 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	MyRegisterClass(hInstance);
 
 	// 执行应用程序初始化:
-	if (!InitInstance (hInstance, nCmdShow))
+	HWND hwnd;
+	if (!(hwnd = InitInstance (hInstance, nCmdShow)))
 	{
 		return FALSE;
 	}
 
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DX9WORLD));
-
+	
+	Application app;
+	if( !app.init( hwnd ) )
+		return FALSE;
+	
+	msg.message = 0;
 	// 主消息循环:
-	while (GetMessage(&msg, NULL, 0, 0))
+	while( msg.message != WM_QUIT )
 	{
-		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+		if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
 		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			TranslateMessage( &msg );
+			DispatchMessage( &msg );
 		}
+		else
+			if( !app.update() )
+				break;
 	}
+
+	app.clear();
 
 	return (int) msg.wParam;
 }
@@ -101,7 +113,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //        在此函数中，我们在全局变量中保存实例句柄并
 //        创建和显示主程序窗口。
 //
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+HWND InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    HWND hWnd;
 
@@ -112,13 +124,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    if (!hWnd)
    {
-      return FALSE;
+      return 0;
    }
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
-   return TRUE;
+   return hWnd;
 }
 
 //
@@ -134,8 +146,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int wmId, wmEvent;
-	PAINTSTRUCT ps;
-	HDC hdc;
+	//PAINTSTRUCT ps;
+	//HDC hdc;
 
 	switch (message)
 	{
@@ -156,9 +168,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
+		//hdc = BeginPaint(hWnd, &ps);
 		// TODO: 在此添加任意绘图代码...
-		EndPaint(hWnd, &ps);
+		//EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
