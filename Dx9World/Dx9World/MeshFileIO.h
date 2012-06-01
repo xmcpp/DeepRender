@@ -57,6 +57,8 @@ public:
 	bool closeMeshFile();
 private:
 	std::ifstream m_stream;
+	MeshFileHead m_fileHead;
+	MeshFileHeadInfo m_fileHeadInfo;
 };
 
 class MeshFileWriter

@@ -1,6 +1,23 @@
 #include "stdafx.h"
 #include "MeshFileIO.h"
 
+bool MeshFileReader::openMeshFile( const std::string & filename )
+{
+	m_stream.open( filename.c_str() , std::ios_base::in	| std::ios_base::binary std::ios_base::_Nocreate);
+	if ( !m_stream.is_open() )
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool MeshFileReader::closeMeshFile()
+{
+	m_stream.close();
+	return true;
+}
+
 bool MeshFileWriter::saveToFile( const std::string & filename )
 {
 	m_stream.open( filename.c_str() ,std::ios_base::out | std::ios_base::binary | std::ios_base::trunc );
