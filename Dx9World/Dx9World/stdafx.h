@@ -19,3 +19,8 @@
 
 
 // TODO: 在此处引用程序需要的其他头文件
+#include "d3dx9.h"
+
+#include <vector>
+#include <map>
+#include <string>
