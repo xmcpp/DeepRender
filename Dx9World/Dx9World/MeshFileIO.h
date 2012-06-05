@@ -5,7 +5,8 @@
 
 enum INDEX_TYPE { INDEX_16 , INDEX_32 };
 enum VERTEX_FORMAT_TYPE { 
-	VT_POS ,
+	VT_POS_XYZ ,
+	VT_POS_XYZW,
 	VT_POS_RHW , 
 	VT_NORMAL , 
 	VT_DIFFUSE , 
@@ -48,6 +49,8 @@ typedef struct tagMeshFileHeadInfo
 
 }MeshFileHeadInfo;
 
+//计算顶点格式的尺寸
+int getVertexTypeSize( VERTEX_FORMAT_TYPE type );
 
 class MeshFileReader
 {
@@ -55,6 +58,14 @@ public:
 public:
 	bool openMeshFile( const std::string & filename );
 	bool closeMeshFile();
+
+	std::string getMaterialName();
+	INDEX_TYPE getIndexType();
+	long getIndexCount();
+	void getIndexData( void * data );
+	std::vector<VERTEX_FORMAT_TYPE> getVertextType();
+	long getVertexCount();
+	void getVertexData( void * data );
 private:
 	std::ifstream m_stream;
 	MeshFileHead m_fileHead;
@@ -68,17 +79,15 @@ public:
 
 	void setMaterialName( const std::string & materialName );
 	void setIndexType( INDEX_TYPE indexType );
-	void setIndexData( int * data , long count );
+	void setIndexData( void * data , long count );
 	void setVertexType( const std::vector<VERTEX_FORMAT_TYPE> &vec );
-	void setVertexData( float * data , long count );
-private:
-	int getVertexTypeSize( VERTEX_FORMAT_TYPE type );
+	void setVertexData( void * data , long count );
 private:
 	std::ofstream m_stream;
 	std::string m_matName;
 	INDEX_TYPE m_indexType;
-	int * m_indexData;
-	float * m_vertexData;
+	void * m_indexData;
+	void * m_vertexData;
 	long m_indexCount;
 	long m_vertexCount;
 	std::vector<VERTEX_FORMAT_TYPE> m_vertexType;

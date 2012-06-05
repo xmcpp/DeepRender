@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="Dx9World"
-	ProjectGUID="{CC6452F9-C947-4C6A-A092-FC1CB73E2228}"
-	RootNamespace="Dx9World"
+	Name="Dx9WorldUnitTest"
+	ProjectGUID="{2F042627-F932-4B43-9A28-29718E24045F}"
+	RootNamespace="Dx9WorldUnitTest"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,7 +18,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../Bin/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../../Bin/Dx9World/$(ConfigurationName)"
 			IntermediateDirectory="../../Compile/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="&quot;$(CPPGURU_SDK)\include\&quot;;../../Dx9World/Dx9World/"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -61,11 +61,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="d3d9.lib d3dx9.lib"
+				AdditionalDependencies="gtestd.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86&quot;"
+				AdditionalLibraryDirectories="$(CPPGURU_SDK)\lib\GTest\Debug"
 				GenerateDebugInformation="true"
-				SubSystem="2"
+				SubSystem="1"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -92,7 +92,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../Bin/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../../Bin/Dx9World/$(ConfigurationName)"
 			IntermediateDirectory="../../Compile/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -117,8 +117,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="&quot;$(CPPGURU_SDK)\include\&quot;;../../Dx9World/Dx9World/"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="2"
@@ -136,11 +136,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="d3d9.lib d3dx9.lib"
+				AdditionalDependencies="gtest.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86&quot;"
+				AdditionalLibraryDirectories="$(CPPGURU_SDK)\lib\GTest\Release"
 				GenerateDebugInformation="true"
-				SubSystem="2"
+				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
@@ -172,118 +172,20 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Tools"
-			>
-			<File
-				RelativePath=".\MapManager.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Singleton.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Testcase.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Testcase.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Main"
+			Name="App"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Application.cpp"
+				RelativePath=".\Dx9WorldUnitTest.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Application.h"
+				RelativePath=".\GlobalInit.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Camera.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Camera.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Core.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Core.h"
-				>
-			</File>
-			<File
-				RelativePath=".\D3D9RenderSystem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\D3D9RenderSystem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MeshFileIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MeshFileIO.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SimpleMaterial.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\SimpleMaterial.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SimpleMesh.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\SimpleMesh.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="资源文件"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-			<File
-				RelativePath=".\Dx9World.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\Dx9World.rc"
-				>
-			</File>
-			<File
-				RelativePath=".\small.ico"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Base"
-			>
-			<File
-				RelativePath=".\Dx9World.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Dx9World.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Resource.h"
+				RelativePath=".\GlobalInit.h"
 				>
 			</File>
 			<File
@@ -312,6 +214,32 @@
 			</File>
 			<File
 				RelativePath=".\targetver.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="源文件"
+			>
+			<File
+				RelativePath="..\..\Dx9World\Dx9World\MeshFileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Dx9World\Dx9World\MeshFileIO.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Testsuites"
+			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
+			<File
+				RelativePath=".\MeshFileIOTestSuite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MeshFileIOTestSuite.h"
 				>
 			</File>
 		</Filter>
