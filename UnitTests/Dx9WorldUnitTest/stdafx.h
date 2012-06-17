@@ -16,3 +16,5 @@
 #include <vector>
 #include <map>
 #include <string>
+
+#include "d3dx9.h"
