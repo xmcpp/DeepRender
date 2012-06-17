@@ -1,13 +1,15 @@
 #include "stdafx.h"
 #include "Application.h"
-#include "Testcase.h"
+#include "Core.h"
 
 bool Application::init( HWND hwnd )
 {
-	Testcase testcase;
-	testcase.doTest();
-
-	return true;
+	new Core();
+	
+	bool ret = Core::getSingleton().init( hwnd );
+	SimpleMesh * pMesh = Core::getSingleton().createMesh( "TestMesh" , "a.mesh" );
+	
+	return ret;
 }
 
 

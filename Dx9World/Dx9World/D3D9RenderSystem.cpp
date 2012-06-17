@@ -68,3 +68,63 @@ bool D3D9RenderSystem::clear()
 	m_p3d9Dev->Clear( 0, NULL, D3DCLEAR_TARGET| D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_RGBA(0,0,0,0), 1.0f, 0 );
 	return true;
 }
+
+IDirect3DVertexBuffer9 * D3D9RenderSystem::createVertexBuffer( const std::string & name , unsigned int bufferSize , int usage , int vertexType , D3DPOOL poolType )
+{
+	if( !m_vertexBuffMap.getObject( name ) )
+		return NULL;
+
+	IDirect3DVertexBuffer9 * pVertexBuff = NULL;
+	HRESULT hr = m_p3d9Dev->CreateVertexBuffer( bufferSize , usage , vertexType , poolType , &pVertexBuff ,NULL );
+	if ( hr != S_OK )
+	{
+		return NULL;
+	}
+	
+	pVertexBuff->AddRef();
+	m_vertexBuffMap.addObject( name , pVertexBuff );
+	return pVertexBuff;
+}
+
+IDirect3DIndexBuffer9 * D3D9RenderSystem::createIndexBuffer( const std::string & name , unsigned int bufferSize , unsigned int usage , D3DFORMAT indexFormat , D3DPOOL poolType )
+{
+	if( !m_indexBuffMap.getObject( name ) )
+		return NULL;
+
+	IDirect3DIndexBuffer9 * pIndexBuff = NULL;
+	HRESULT hr = m_p3d9Dev->CreateIndexBuffer( bufferSize , usage , indexFormat , poolType , &pIndexBuff , NULL );
+	if( hr != S_OK )
+		return NULL;
+
+	pIndexBuff->AddRef();
+	m_indexBuffMap.addObject( name , pIndexBuff );
+	return pIndexBuff;
+}
+
+IDirect3DVertexBuffer9 * D3D9RenderSystem::getVertexBuffer( const std::string & name )
+{
+	return m_vertexBuffMap.getObject( name );
+}
+
+IDirect3DIndexBuffer9 * D3D9RenderSystem::getIndexBuffer( const std::string & name )
+{
+	return m_indexBuffMap.getObject( name );
+}
+
+void D3D9RenderSystem::destoryVertexBuffer( const std::string & name )
+{
+	IDirect3DVertexBuffer9 * pbuf = m_vertexBuffMap.getObject( name );
+	if( !pbuf )
+		return;
+	m_vertexBuffMap.remove( name );
+	pbuf->Release();
+}
+
+void D3D9RenderSystem::destoryIndexBuffer( const std::string & name )
+{
+	IDirect3DIndexBuffer9 * pbuf = m_indexBuffMap.getObject( name );
+	if( !pbuf )
+		return;
+	m_indexBuffMap.remove( name );
+	pbuf->Release();
+}

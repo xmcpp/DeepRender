@@ -51,6 +51,7 @@ typedef struct tagMeshFileHeadInfo
 
 //计算顶点格式的尺寸
 int getVertexTypeSize( VERTEX_FORMAT_TYPE type );
+int getD3dVertexType( std::vector<VERTEX_FORMAT_TYPE> & vec );
 
 class MeshFileReader
 {

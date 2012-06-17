@@ -227,3 +227,61 @@ int getVertexTypeSize( VERTEX_FORMAT_TYPE type )
 	}
 	return retVal;
 }
+
+int getD3dVertexType( std::vector<VERTEX_FORMAT_TYPE> & vec )
+{
+	int retVal = 0;
+	for( size_t i = 0 ; i < vec.size() ; i++ )
+	{
+		switch ( vec[i] )
+		{
+		case VT_POS_XYZW:
+			retVal |= D3DFVF_XYZW;
+			break;
+		case VT_POS_RHW:
+			retVal |= D3DFVF_XYZRHW;
+			break;
+		case VT_NORMAL:
+			retVal |= D3DFVF_NORMAL;
+			break;
+		case VT_DIFFUSE:
+			retVal |= D3DFVF_DIFFUSE;
+			break;
+		case VT_SPECULAR:
+			retVal |= D3DFVF_SPECULAR;
+			break;
+		case VT_POS_XYZ:
+			retVal |= D3DFVF_XYZ;
+			break;
+		case VT_UV0:
+			retVal |= D3DFVF_TEX0;
+			break;
+		case VT_UV1:
+			retVal |= D3DFVF_TEX1;
+			break;
+		case VT_UV2:
+			retVal |= D3DFVF_TEX2;
+			break;
+		case VT_UV3:
+			retVal |= D3DFVF_TEX3;
+			break;
+		case VT_UV4:
+			retVal |= D3DFVF_TEX4;
+			break;
+		case VT_UV5:
+			retVal |= D3DFVF_TEX5;
+			break;
+		case VT_UV6:
+			retVal |= D3DFVF_TEX6;
+			break;
+		case VT_UV7:
+			retVal |= D3DFVF_TEX7;
+			break;
+		case VT_UV8:
+			retVal |= D3DFVF_TEX8;
+			break;
+		}
+	}
+	
+	return retVal;
+}
