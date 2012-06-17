@@ -237,6 +237,30 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RenderController.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RenderController.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneGraph.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneGraph.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneGraphNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneGraphNode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SimpleMaterial.cpp"
 				>
 			</File>
