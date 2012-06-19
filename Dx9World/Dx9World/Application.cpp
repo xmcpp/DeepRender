@@ -1,20 +1,26 @@
 #include "stdafx.h"
 #include "Application.h"
 #include "Core.h"
+#include "SceneGraph.h"
+#include "SceneGraphNode.h"
 
 bool Application::init( HWND hwnd )
 {
-	new Core();
+	m_core = new Core();
 	
-	bool ret = Core::getSingleton().init( hwnd );
-	SimpleMesh * pMesh = Core::getSingleton().createMesh( "TestMesh" , "a.mesh" );
-	
+	bool ret = m_core->init( hwnd );
+	SimpleMesh * pMesh = m_core->createMesh( "TestMesh" , "a.mesh" );
+	SceneGraph * pSG = m_core->createSceneGraph( "MainScene" );
+	SceneGraphNode * pNode = pSG->getRootSceneNode();
+	pNode->attachMesh( pMesh );
+
 	return ret;
 }
 
 
 bool Application::update()
 {
+	m_core->update();
 	return true;
 }
 
