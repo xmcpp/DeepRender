@@ -10,8 +10,10 @@
 #ifndef __SCENEGRAPH_H__
 #define __SCENEGRAPH_H__
 
+#include "MapManager.h"
+
 class SceneGraphNode;
-class SceneGraph : MapManager<SceneGraph>
+class SceneGraph : MapManager<SceneGraphNode>
 {
 public:
 	SceneGraph( const std::string & name );
@@ -19,8 +21,13 @@ public:
 public:
 	SceneGraphNode * createSceneGraphNode( const std::string & name );
 	SceneGraphNode * getSceneGraphNode( const std::string & name );
+	void destorySceneGraphNode( const std::string & name );
+	void destoryAllSceneGraphNode();
+
+	SceneGraphNode * getRootSceneNode() { return m_rootNode; }
 private:
 	std::string m_name;
+	SceneGraphNode * m_rootNode;
 };
 
 #endif //__SCENEGRAPH_H__
