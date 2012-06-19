@@ -10,7 +10,12 @@ SceneGraphNode::SceneGraphNode( const std::string & name , SceneGraph * pSG )
 
 SceneGraphNode::~SceneGraphNode()
 {
-
+	//删除所有子结点
+	removeAllChildNode();
+	
+	//从父结点上删除自己
+	if( m_parentNode )
+		m_parentNode->removeChildNode( this );
 }
 
 void SceneGraphNode::addChildNode( SceneGraphNode * node )
@@ -42,8 +47,9 @@ void SceneGraphNode::removeChildNode( SceneGraphNode * node )
 {
 	for( childNodeVecItor it = m_childNodeVec.begin() ; it != m_childNodeVec.end() ; it++ )
 	{
-		if ( (*it)->m_parentNode == node )
+		if ( (*it) == node )
 		{
+			(*it)->m_parentNode = NULL;//将字节点的父结点设空
 			m_childNodeVec.erase(it);
 			break;
 		}
