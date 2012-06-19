@@ -9,6 +9,7 @@ class SimpleMesh;
 class SimpleMaterial;
 class RenderController;
 class SceneGraph;
+class SceneGraphNode;
 class Core : public Singleton<Core>
 {
 public:
